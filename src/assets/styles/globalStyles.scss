@@ -1,0 +1,31 @@
+:root{
+  font-size: 18px;
+  font-family: Helvetica;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  position: relative;
+  box-sizing: border-box;
+}
+
+#app {
+  background-color: red;
+  width: 100vw;
+  height: 100vh;
+  padding: 1rem;
+}
+
+.menu-background-image{
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  background-image: url("https://www.shutterstock.com/shutterstock/photos/1890767740/display_1500/stock-photo--d-render-number-one-glowing-in-the-dark-pink-blue-neon-light-1890767740.jpg");
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-size:cover;
+  opacity: 0.6;
+}
