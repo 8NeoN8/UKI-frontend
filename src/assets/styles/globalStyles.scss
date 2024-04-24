@@ -3,6 +3,16 @@
   font-family: Helvetica;
 }
 
+$primary-color: lime;
+$secundary-color: rgb(0, 169, 0);
+
+$percents: 100 75 50 25;
+$test-backgrounds: red blue yellow brown black white purple cyan green lime none;
+$text-align: right center left justify;
+$half-font-sizes: 1 2 3;
+$justify-flex: right left center space-around space-between;
+
+
 *{
   margin: 0;
   padding: 0;
@@ -11,21 +21,115 @@
 }
 
 #app {
-  background-color: red;
   width: 100vw;
   height: 100vh;
-  padding: 1rem;
 }
 
-.menu-background-image{
-  position: absolute;
-  top: 0;
-  left: 0;
-  min-width: 100%;
-  min-height: 100%;
-  background-image: url("https://www.shutterstock.com/shutterstock/photos/1890767740/display_1500/stock-photo--d-render-number-one-glowing-in-the-dark-pink-blue-neon-light-1890767740.jpg");
-  background-repeat: no-repeat;
-  background-position: 0 0;
-  background-size:cover;
-  opacity: 0.6;
+.flex{
+  display: flex;
+}
+
+.justify-center{
+  justify-content: center;
+}
+
+.align-center{
+  align-items: center;
+}
+
+.overflow-h{
+  overflow: hidden;
+}
+
+.center-content{
+  display: flex;
+  @extend .justify-center, .align-center;
+}
+
+.center-content-column{
+  @extend .center-content;
+  flex-direction: column;
+}
+
+.flex-column{
+  flex-direction: column;
+}
+
+.justify-around{
+  justify-content: space-around;
+}
+
+.justify-between{
+  justify-content: space-between;
+}
+
+.justify-left{
+  justify-content: left;
+}
+
+.justify-right{
+  justify-content: right;
+}
+
+@for $i from 1 through 5 {
+  .m-#{$i} {
+    margin: #{$i}rem;
+  }
+
+  .p-#{$i} {
+    padding: #{$i}rem;
+  }
+
+  .fs-#{$i}{
+    font-size: #{$i}rem;
+  }
+}
+
+@for $i from 1 through 3{
+  .fsh-#{$i}{
+    font-size: #{$i - 0.5}rem;
+  }
+}
+
+@each $percent in $percents{
+  .w-#{$percent}{
+    width: unquote($percent+'%');
+  }
+
+  .h-#{$percent}{
+    height: unquote($percent+'%');
+  }
+}
+
+@each $color in $test-backgrounds{
+  .test-bg-#{""+$color}{
+    background-color: $color;
+  }
+}
+
+@each $align in $text-align{
+  .text-#{$align}{
+    text-align: $align;
+  }
+}
+
+.button-base{
+  all:unset;
+  font-size: 1.2rem;
+  padding: 0.5rem 1rem;
+  border-radius: 15px;
+  border: 1px solid red;
+  background-color: $primary-color;
+  margin:0.5rem;
+  display: inline-block;
+  width: fit-content;
+  &:hover{
+    background-color: $secundary-color;
+    animation: grow 0.1s forwards;
+  }
+}
+
+@keyframes grow {
+  from{ transform: scale(1); }
+  to { transform: scale(1.1); }
 }
