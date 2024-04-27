@@ -17,11 +17,11 @@
     <div class="menu-main flex justify-between h-80">
       <ul class="menu-main-options flex flex-column test-bg-brown w-85 justify-start p-2">
   
-        <button @click="sendTo('/about')" class="mm-link fsh-2 text-left"> <span>Host</span></button>
-        <button @click="sendTo('/about')" class="mm-link fsh-2 text-left">Join</button>
-        <button @click="sendTo('/about')" class="mm-link fsh-2 text-left">Leaderboard</button>
-        <button @click="sendTo('/about')" class="mm-link fsh-2 text-left">About</button>
-        <button class="mm-link fsh-2 text-left" @click="nameSet = false; tempUsername = ''; username = ''">Change Name</button>
+        <button @click="sendTo('/about')" class="mm-link sp-hover fsh-2 text-left"><span> Join </span></button>
+        <button @click="sendTo('/about')" class="mm-link sp-hover fsh-2 text-left"><span> Custom </span></button>
+        <button @click="sendTo('/about')" class="mm-link sp-hover fsh-2 text-left"><span> Leaderboard </span></button>
+        <button @click="sendTo('/about')" class="mm-link sp-hover fsh-2 text-left"><span> About </span></button>
+        <button class="mm-link sp-hover fsh-2 text-left" @click="nameSet = false; tempUsername = ''; username = ''"><span> Change Name </span></button>
       
       </ul>
 

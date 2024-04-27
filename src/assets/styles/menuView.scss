@@ -64,20 +64,36 @@
   
 }
 
-.mm-link:hover{
-  color: orange;
-  animation: mm-link-slide 0.2s forwards ease-in-out;
-  &::before{
-
+.sp-hover{
+  span{
+    display: inline-block;
+    animation: hover-slide-out 0.2s backwards ease-in-out;
   }
 }
 
-@keyframes mm-link-slide {
+.sp-hover:hover{  
+  span{
+    display: inline-block;
+    color:orange;
+    animation: hover-slide-in 0.2s forwards ease-in-out;
+  }
+}
+
+@keyframes hover-slide-in {
   from{
     transform: translateX(0);
   }
   to{
     transform: translateX(80px);
+  }
+}
+
+@keyframes hover-slide-out {
+  from{
+    transform: translateX(80px);
+  }
+  to{
+    transform: translateX(0);
   }
 }
 
