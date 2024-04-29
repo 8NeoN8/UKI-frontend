@@ -1,53 +1,56 @@
 <template>
-  <main class="menu-container flex flex-column justify-between">
+  <main class="menu-container container flex justify-between p-2 test-bg-cyan">
 
-    <header class="menu-header test-bg-yellow text-center h-10 text-left flex flex-between">
+    <div class="menu-left w-30 flex flex-column justify-between">
+      <div @click="sendTo('/about')" class="username-display flex align-center justify-between test-bg-gray ph-1">
 
-      <div class="header-left test-bg-lime w-85 flex flex-column justify-center px-1">
-        <div class="game-name-display fsh-3">U KNOW IT</div>
-        <div class="game-subtitle-display fsh-2">Another game where friendships are ruined</div>
+        <img class="username-image" src="https://www.shutterstock.com/shutterstock/photos/1890767740/display_1500/stock-photo--d-render-number-one-glowing-in-the-dark-pink-blue-neon-light-1890767740.jpg" alt="" width="70px" height="70px">
+
+        <div class="username-text text-left w-100 fs-2 px-2"> NeoN</div>
+
       </div>
 
-      <div class="header-right test-bg-red w-15 center-content">
-        <div class="username-diplay fsh-2">{{username}}</div>
+      <div class="main-options h-80 fs-2">
+
+        <div @click="sendTo('/join')" class="menu-option flex flex-column">
+          <img class="option-image h-80" src="https://www.shutterstock.com/shutterstock/photos/1890767740/display_1500/stock-photo--d-render-number-one-glowing-in-the-dark-pink-blue-neon-light-1890767740.jpg" width="100%" height="150px">
+          <div class="option-text h-20 text-center test-bg-gray">Join</div>
+        </div>
+        <div @click="declareHost();sendTo('/lobby')" class="menu-option flex flex-column">
+          <img class="option-image h-80" src="https://www.shutterstock.com/shutterstock/photos/1890767740/display_1500/stock-photo--d-render-number-one-glowing-in-the-dark-pink-blue-neon-light-1890767740.jpg" width="100%" height="150px">
+          <div class="option-text h-20 text-center test-bg-gray">Custom</div>
+        </div>
+        <div @click="sendTo('/leaderboard')" class="menu-option flex flex-column">
+          <img class="option-image h-80" src="https://www.shutterstock.com/shutterstock/photos/1890767740/display_1500/stock-photo--d-render-number-one-glowing-in-the-dark-pink-blue-neon-light-1890767740.jpg" width="100%" height="150px">
+          <div class="option-text h-20 text-center test-bg-gray">Leaderboard</div>
+        </div>
+        <div @click="sendTo('/about')" class="menu-option flex flex-column">
+          <img class="option-image h-80" src="https://www.shutterstock.com/shutterstock/photos/1890767740/display_1500/stock-photo--d-render-number-one-glowing-in-the-dark-pink-blue-neon-light-1890767740.jpg" width="100%" height="150px">
+          <div class="option-text h-20 text-center test-bg-gray">About</div>
+        </div>
+
       </div>
 
-    </header>
+      <div @click="sendTo('/about')" class="change-name-button w-100 h-15 fs-2 text-center test-bg-gray flex flex-column justify-center">
+        <div>CHANGE NAME</div>
+      </div>
 
-    <div class="menu-main flex justify-between h-80">
-      <ul class="menu-main-options flex flex-column test-bg-brown w-85 justify-start p-2">
-  
-        <button @click="sendTo('/about')" class="mm-link sp-hover fsh-2 text-left"><span> Join </span></button>
-        <button @click="sendTo('/about')" class="mm-link sp-hover fsh-2 text-left"><span> Custom </span></button>
-        <button @click="sendTo('/about')" class="mm-link sp-hover fsh-2 text-left"><span> Leaderboard </span></button>
-        <button @click="sendTo('/about')" class="mm-link sp-hover fsh-2 text-left"><span> About </span></button>
-        <button class="mm-link sp-hover fsh-2 text-left" @click="nameSet = false; tempUsername = ''; username = ''"><span> Change Name </span></button>
-      
-      </ul>
-
-      <aside class="menu-main-news center-content w-15 test-bg-cyan">
-        "news" o cualquier vaina que queramos poner aqui
-      </aside>
     </div>
 
-    <footer class="menu-footer test-bg-purple h-10 overflow-h w-100">
-      <div class="social-links flex justify-around align-center overflow-h">
-        <div class="button-base">discord</div>
-        <div class="button-base">github</div>
-        <div class="button-base">patreon</div>
-        <div class="button-base">twitter</div>
-      </div>
-      <div class="copyright-section">
-        copyright &copy; Haskell? I barely know 'er 2024
-      </div>
-    </footer>
+    <div class="menu-right test-bg-yellow w-30 flex flex-column justify-between">
+      <div class="gamename-display h-15 test-bg-blue"> U KNOW IT</div>
 
-    <div class="username-popup test-bg-purple" v-if="!nameSet">
-      <div class="username-container">
-        <label for="username-input" class="username-input-label">Set your Username</label>
-        <input type="text" class="username-input" name="username-input" v-model="tempUsername">
-        <button type="submit" class="username-submit-button" maxLenght=20 @click="checkUsername(tempUsername)">Set</button>
+      <div class="news-display h-60 test-bg-purple">news</div>
+
+      <div class="socials flex flex-column h-25 test-bg-red">
+
+        <div class="social-link">Discord</div>
+        <div class="social-link">Twitter</div>
+        <div class="social-link">Github</div>
+        <div class="social-link">Discord</div>
+
       </div>
+
     </div>
 
   </main>
@@ -56,15 +59,11 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-
 import { useUserStore } from '@/stores/username'
 
 export default defineComponent({
   // type inference enabled
-  props: {
-    name: String,
-    msg: { type: String, required: false }
-  },
+  name:'MenuView',
   data() {
     return {
       username: '',
@@ -81,8 +80,6 @@ export default defineComponent({
   },
   mounted() {
   },
-  components:{
-  },
   methods: {
     sendTo(route: string){
       this.$router.push(route)
@@ -91,6 +88,9 @@ export default defineComponent({
       name.length <= 16 ? this.nameSet = true : console.log('no go');
       this.store.user = name
       this.username = this.store.user
+    },
+    declareHost(){
+      this.store.isHost = true
     }
   },
 })

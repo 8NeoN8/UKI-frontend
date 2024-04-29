@@ -1,0 +1,17 @@
+@import './globalStyles.scss';
+
+.code{
+  color: white;
+}
+
+.chat-messages{
+  flex-direction: column-reverse;
+  overflow-y: auto;
+  word-break: break-all;
+  white-space: wrap;
+}
+
+.chat-msg{
+  word-break: break-all;
+  white-space: wrap;
+}

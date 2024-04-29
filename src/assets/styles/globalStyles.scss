@@ -11,10 +11,9 @@
 $primary-color: lime;
 $secundary-color: rgb(0, 169, 0);
 
-$percents: 100 90 85 80 75 70 60 50 30 25 15 10 5;
-$test-backgrounds: red blue yellow brown black white purple cyan green lime none;
+$percents: 100 95 90 85 80 75 70 65 60 50 45 40 35 30 25 15 10 5;
+$test-backgrounds: red blue yellow brown black white gray purple cyan green lime none;
 $text-align: right center left justify;
-$half-font-sizes: 1 2 3;
 $justify-flex: right left center space-around space-between;
 
 *{
@@ -24,7 +23,7 @@ $justify-flex: right left center space-around space-between;
   box-sizing: border-box;
 }
 
-#app {
+#app, .container {
   width: 100vw;
   height: 100vh;
 }
@@ -87,6 +86,21 @@ $justify-flex: right left center space-around space-between;
   .my-#{$i} {
     margin: #{$i}rem 0;
   }
+  .ml-#{$i} {
+    margin-left: #{$i}rem;
+  }
+
+  .mr-#{$i} {
+    margin-right: #{$i}rem;
+  }
+
+  .mt-#{$i} {
+    margin-top: #{$i}rem;
+  }
+
+  .mb-#{$i} {
+    margin-bottom: #{$i}rem;
+  }
 
   .p-#{$i} {
     padding: #{$i}rem;
@@ -100,6 +114,22 @@ $justify-flex: right left center space-around space-between;
     padding: #{$i}rem 0;
   }
 
+  .pl-#{$i} {
+    padding-left: #{$i}rem;
+  }
+
+  .pr-#{$i} {
+    padding-right: #{$i}rem;
+  }
+
+  .pt-#{$i} {
+    padding-top: #{$i}rem;
+  }
+
+  .pb-#{$i} {
+    padding-bottom: #{$i}rem;
+  }
+
   .fs-#{$i}{
     font-size: #{$i}rem;
   }
@@ -108,6 +138,14 @@ $justify-flex: right left center space-around space-between;
 @for $i from 1 through 3{
   .fsh-#{$i}{
     font-size: #{$i - 0.5}rem;
+  }
+
+  .ph-#{$i}{
+    padding: #{$i - 0.5}rem;
+  }
+
+  .mh-#{$i}{
+    margin: #{$i - 0.5}rem;
   }
 }
 
@@ -144,6 +182,7 @@ $justify-flex: right left center space-around space-between;
   min-width: 150px;
   width: fit-content;
   max-width: 300px;
+  text-align: center;
   &:hover{
     background-color: $secundary-color;
     animation: grow 0.1s forwards ease-in-out;
@@ -153,4 +192,9 @@ $justify-flex: right left center space-around space-between;
 @keyframes grow {
   from{ transform: scale(1); }
   to { transform: scale(1.1); }
+}
+
+@keyframes shrink {
+  from{ transform: scale(1.1); }
+  to { transform: scale(1); }
 }
