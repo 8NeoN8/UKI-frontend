@@ -59,7 +59,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { useUserStore } from '@/stores/username'
+import { userStore } from '@/stores/user'
 
 export default defineComponent({
   // type inference enabled
@@ -69,7 +69,7 @@ export default defineComponent({
       username: '',
       tempUsername:'',
       nameSet:false,
-      store: useUserStore(),
+      store: userStore(),
     }
   },
   created() {
@@ -79,6 +79,8 @@ export default defineComponent({
     }
   },
   mounted() {
+    this.store.user = 'NeoN'
+
   },
   methods: {
     sendTo(route: string){

@@ -19,13 +19,14 @@
         <div class="chat-messages test-bg-lime h-95 flex px-1">
           <template v-for="(msg, index) in messages" :key="index">
             <div class="chat-msg mb-1 fs-1">
-              {{ msg }}
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia eaque minima, aspernatur, dicta ducimus possimus soluta ea modi alias rem debitis, repudiandae quis corrupti. Repudiandae delectus voluptatibus quisquam corrupti laborum.
+              <div>{{ msg.msgSender }}</div>
+              <div>{{ msg.msgText }}</div>
             </div>
           </template>
         </div>
-        <div class="chat-input h-5">
-          <input type="text" class="w-100 h-100 p-1 fs-1" placeholder="text">
+        <div class="chat-input h-5 flex">
+          <input type="text" class="w-100 h-100 p-1 fs-1" placeholder="text" v-model="currentMessage">
+          <button @click="sendMessage()">enviar</button>
         </div>
       </div>
     </div>
@@ -51,13 +52,22 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { useUserStore } from '@/stores/username'
+import { userStore } from '@/stores/user'
+import { messageStore } from '@/stores/messages'
+
+type Message = {
+  msgLobby: string,
+  msgText: string,
+  msgSender: string,
+  msgDate: object
+}
 
 export default defineComponent({
   name:'CustomView',
   data() {
     return {
-      store: useUserStore(),
+      clientStore: userStore(),
+      messageStore: messageStore(),
       isHost:false,
       lobbyCode:'F52ALP',
       image: 'https://www.shutterstock.com/shutterstock/photos/1890767740/display_1500/stock-photo--d-render-number-one-glowing-in-the-dark-pink-blue-neon-light-1890767740.jpg',
@@ -65,9 +75,9 @@ export default defineComponent({
         {
           name:'NeoN',
           host: true,
-          ready:true,
+          ready:false,
         },
-        {
+        /* {
           name:'Hailel',
           host: false,
           ready:false,
@@ -101,13 +111,18 @@ export default defineComponent({
           name:'Kong',
           host: false,
           ready:false,
-        },
+        }, */
       ],
-      messages:['asdf','a56f8aw44','pioqnoperinv','asda864ref','asvwervdf','awervtbwsdf','asvrwdf','asdfwtbw','asdf2545','asdfasdfasdf'],
+      currentMessage:'',
+    }
+  },
+  computed:{
+    messages(){
+      return this.messageStore.msgList
     }
   },
   created() {
-    this.isHost = this.store.isHost
+    this.isHost = this.clientStore.isHost
   },
   mounted() {
     
@@ -117,7 +132,17 @@ export default defineComponent({
       this.$router.push(route)
     },
     removeHost(){
-      if(this.isHost) this.store.isHost = false
+      if(this.isHost) this.clientStore.isHost = false
+    },
+    sendMessage(){
+      const messageEvent = {
+        msgLobby: this.lobbyCode,
+        msgText: this.currentMessage,
+        msgSender:this.clientStore.user,
+        msgDate: new Date()
+      }
+      this.messageStore.msgList.push(messageEvent) /* = [...this.messageStore.msgList, messageEvent] */
+      this.currentMessage = ''
     }
   },
 })
