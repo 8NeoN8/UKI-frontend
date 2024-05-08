@@ -70,14 +70,13 @@ export default defineComponent({
       messageStore: messageStore(),
       isHost:false,
       lobbyCode:'F52ALP',
-      image: 'https://www.shutterstock.com/shutterstock/photos/1890767740/display_1500/stock-photo--d-render-number-one-glowing-in-the-dark-pink-blue-neon-light-1890767740.jpg',
       players:[
         {
           name:'NeoN',
           host: true,
           ready:false,
         },
-        /* {
+        {
           name:'Hailel',
           host: false,
           ready:false,
@@ -111,7 +110,7 @@ export default defineComponent({
           name:'Kong',
           host: false,
           ready:false,
-        }, */
+        },
       ],
       currentMessage:'',
     }
@@ -119,9 +118,13 @@ export default defineComponent({
   computed:{
     messages(){
       return this.messageStore.msgList
+    },
+    image(){
+      return this.clientStore.userImg
     }
   },
   created() {
+    console.log(this.clientStore.isHost);
     this.isHost = this.clientStore.isHost
   },
   mounted() {
