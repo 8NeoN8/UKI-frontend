@@ -28,6 +28,11 @@ const router = createRouter({
       name: 'leaderboard',
       component: () => import('../views/LeaderboardView.vue')
     },
+    {
+      path: '/game',
+      name: 'name',
+      component: () => import('../views/GamerView.vue')
+    }
   ]
 })
 

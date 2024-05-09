@@ -102,7 +102,7 @@ export default defineComponent({
       sections:[
         {
           text: 'Join',
-          link: '/join'
+          link: '/game'
         },
         {
           text: 'Custom',
