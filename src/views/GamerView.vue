@@ -65,7 +65,17 @@ export default defineComponent({
       ],
       //make the variable have the htmlcanvaslement type because otherwise it screams at me
       canvas: canvasElement,
-        
+      isPressedDown: false,
+      currentPos: {
+        x:0,
+        y:0
+      } || undefined,
+      squareObject:{
+        x:0,
+        y:0,
+        w:0,
+        h:0
+      }
     }
   },
   computed:{
@@ -82,12 +92,27 @@ export default defineComponent({
     this.getCanvas() 
     if(this.canvas){
       this.canvas.addEventListener('click',(e) => {
-        this.handleCanvasClick(e)
+        this.isObjectClicked(this.getMousePos(e)!, this.squareObject)
+      })
+      this.canvas.addEventListener('mousedown',(e) => {
+        console.log('down como yo');
       },false)
 
-      /* this.canvas.addEventListener('mousemove',(e) => {
-        this.getMousePos(e)
-      },false) */
+      this.canvas.addEventListener('mousemove',(e) => {
+        if(this.isPressedDown){
+          let newPos = this.getMousePos(e)
+          if(newPos != this.currentPos){
+            console.log(newPos);
+            
+            this.drawRect(newPos!.x,newPos!.y, 100,100)
+          }
+          this.currentPos = newPos!
+        }
+      },false)
+
+      this.canvas.addEventListener('mouseup',(e) => {
+        this.isPressedDown = false
+      },false)
     }
 
   },
@@ -113,13 +138,40 @@ export default defineComponent({
           }
         }
       }
-      this.draw()
+      this.drawRect(0,0,200,250)
     },
-    draw(){
+    isObjectClicked(mousePos: any, moveObject: any){
+      let objectCorners = {
+        topLeft: {x: moveObject.x, y: moveObject.y},
+        topRight: {x:moveObject.x + moveObject.w, y: moveObject.y },
+        bottomLeft: {x:moveObject.x, y: moveObject.y + moveObject.h},
+        bottomRight: {x: moveObject.x + moveObject.w, y: moveObject.y + moveObject.h},
+      }
+
+      if(
+        mousePos.x > objectCorners.topLeft.x &&
+        mousePos.x < objectCorners.topRight.x &&
+        mousePos.y > objectCorners.topLeft.y &&
+        mousePos.y > objectCorners.bottomLeft.y
+      ){
+        console.log(mousePos, moveObject);
+        this.isPressedDown = true
+      }
+    },
+    drawRect(x: number, y: number, w: number, h: number){
       if (this.ctx) {
-        this.ctx.rect(200, 200, 150, 50);
+        this.ctx.clearRect(0,0,this.canvas!.width,this.canvas!.height)
+        this.ctx.beginPath()
+        this.ctx.rect(x, y, w, h);
         this.ctx.fillStyle = '#ff0000';
         this.ctx.fill();
+        this.squareObject = {
+          x: x,
+          y: y,
+          w: w,
+          h: h 
+        }
+        console.log(this.squareObject);
       }
     },
     handleCanvasClick(e: Event):any{
@@ -132,11 +184,14 @@ export default defineComponent({
         var rect = c.getBoundingClientRect();
         //console.log(Math.floor(evt.clientX - rect.left), Math.floor(evt.clientY - rect.top));
         return {
-            x: evt.clientX - rect.left,
-            y: evt.clientY - rect.top
+            x: Math.floor(evt.clientX - rect.left),
+            y: Math.floor(evt.clientY - rect.top)
         }
       }
     },
+    handleMouseDown(initPos: any){
+      
+    }
   },
 })
 
