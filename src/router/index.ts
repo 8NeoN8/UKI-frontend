@@ -30,7 +30,7 @@ const router = createRouter({
     },
     {
       path: '/game',
-      name: 'name',
+      name: 'game',
       component: () => import('../views/GamerView.vue')
     }
   ]

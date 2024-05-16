@@ -190,11 +190,28 @@ $justify-flex: right left center space-around space-between;
 }
 
 @keyframes grow {
-  from{ transform: scale(1); }
-  to { transform: scale(1.1); }
+  from{ transform: scale(1); top:0 }
+  to { transform: scale(1.1); top:-50px}
 }
 
 @keyframes shrink {
   from{ transform: scale(1.1); }
   to { transform: scale(1); }
+}
+
+
+
+.player-card{
+  border: 3px solid yellow;
+  width: 190px;
+  height: 288px;
+  background-image: url('@/assets/img/backPNGcut.png');
+  background-size:cover;
+  animation: shrink 0.1s forwards ease-in-out;
+  position: absolute;
+  top: 0;
+  &:hover{
+    animation: grow 0.1s forwards ease-in-out;
+    margin-right: 20px;
+  }
 }
